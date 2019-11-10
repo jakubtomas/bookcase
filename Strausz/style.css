@@ -1,0 +1,40 @@
+.img-fluid {
+  width: 20%;
+  margin: 0;
+
+}
+.bg{
+  background-image: url("https://wallpaperaccess.com/full/253371.jpg");
+  width: 100%;
+  margin :0 0 1em auto!important;
+  height: 750px;
+  position: relative;
+  display: flex;
+  display: -ms-flexbox;
+  align-items: center;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+}
+.button{
+  padding: 0!important;
+}
+a{
+  color:white;
+}
+
+a:hover, a:focus {
+  color: #0088a9;
+  text-decoration: none;
+  list-style: none;
+}
+
+
+.card-deck{
+  width: 70%;
+  margin: 0 15% 0 15%;
+}
+
+
+
