@@ -36,5 +36,14 @@ a:hover, a:focus {
   margin: 0 15% 0 15%;
 }
 
-
-
+@media screen and (max-width:600px){
+.img-fluid{
+  display: none;
+}
+}
+@media (min-width: 576px){
+  .navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 3.5rem;
+    padding-left: .5rem;
+  }
+}
