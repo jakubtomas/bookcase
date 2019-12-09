@@ -38,7 +38,7 @@ if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg">
         <div class="col-md-5 p-lg-5 mx-auto my-5">
             <h1 class="display-4 font-weight-bold text-white">Welcome to our Library</h1>
-            <form id="edit-form" class="" action="<?= $site_url ?>search-book.php" method="post" enctype="multipart/form-data" name="search">
+            <form id="edit-form" class="" action="<?= $site_url ?>search-book.php" method="GET" enctype="multipart/form-data" name="search">
                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1"
                        class="form-control border-0 bg-light" name = "searchbook">
             </form>

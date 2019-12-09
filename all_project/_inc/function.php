@@ -84,14 +84,20 @@ function getSearchBook()
                              OR desription LIKE :desription
                                  ");
 
-    if (empty($_POST['search'])) {
+    /*if (empty($_POST['search'])) {
         $q = plain($_POST['searchbook']);
     }else {
 
     $q = plain($_POST['search']);
+    }*/
+
+
+    if (empty($_GET['search'])) {
+        $q = plain($_GET['searchbook']);
+    }else {
+
+        $q = plain($_GET['search']);
     }
-
-
     
 
 

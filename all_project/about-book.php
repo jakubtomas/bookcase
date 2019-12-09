@@ -133,6 +133,9 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 }else die("404");
 
 
+echo '<pre>';
+print_r($book);
+echo '</pre>';
 
 ?>
 
@@ -221,20 +224,10 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
                <?php endif;   ?>
                     <p></p>
                     <p><b> Description:</b></p>
-                    <p class="text-justify">V Biblii nájdeme poučný odkaz, že človek ani netuší, kedy
-                        sa priblíži jeho koniec. Ak je však niekto nepoučiteľný a postaví
-                        sa osudu, sú z toho len problémy. Detektív Richard Krauz je tu na to,
-                        aby osudové problémy riešil. Tak to bolo aj v pamätný deň na prelome
-                        tisícročí – na Silvestra 1999.
-                        <span class="collapse " id="viewdetails3"> Dve hodiny pred polnocou ho zavolali na cintorín
-                k náhrobnému kameňu postriekanému krvou. Krv nebola jediná zvláštnosť na hrobe, záhadnejší
-                bol čerstvo vytesaný dátum úmrtia – zajtrajší deň, prvý deň nového milénia. Na prvý pohľad
-                hlúpy žart, no detektíva Krauza prejde smiech v momente, keď mu z operačného strediska zahlásia,
-                že majiteľ hrobu prvú hodinu po polnoci naozaj zomrel. Osud sa s ním kruto zahral, nech plánoval
-                voju smrť akokoľvek precízne, niekto ho predbehol. Muža strelili do chrbta spôsobom vylučujúcim
-                samovraždu.
-              </span>
                     <p>
+                    <p class="text-justify"> <?php echo substr($value["desription"],0,140);?>
+                        <!--<span class="collapse " id="viewdetails3"><?php /*echo $value["desription"] */?></span>-->
+                        <span class="collapse " id="viewdetails3"><?php echo plain($value["desription"],140,6000) ?></span>
                         <a class="btn text-primary" data-toggle="collapse" data-target="#viewdetails3">Read more</a>
                     </p>
                     </p>

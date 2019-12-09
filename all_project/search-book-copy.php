@@ -8,10 +8,18 @@ include_once '_partials/header.php';
 ?>
 
 
+
+
 <div class="white">
     <div class="search">
 
-<!--
+
+       <!-- <form action="search-book.php" method="POST" class="form-inline">
+            <label for="search" class="mr-sm-2">Search books </label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="search" name="search">
+
+            <input class="btn-sm btn-primary margin-bottom" type="submit" value="Send" name="searchbook">
+        </form>-->
 
         <form action="search-book.php" method="POST" class="form-inline">
             <div class="form-group mx-sm-3 ">
@@ -23,28 +31,19 @@ include_once '_partials/header.php';
             <input class="btn-sm btn-primary " type="submit" value="Search" name="searchbook">
         </form>
 
--->
-        <form action="search-book.php" method="GET" class="form-inline">
-            <div class="form-group mx-sm-3 ">
+       <!-- <form class="form-inline">
 
-                <label for="search" class="mr-sm-2 ">Search books </label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="search" name="search">
-
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Password</label>
+                <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
             </div>
-            <input class="btn-sm btn-primary " type="submit" value="Search" name="searchbook">
-        </form>
-
+            <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+        </form>-->
 
     </div>
 
-    <?php if (isset($_GET["searchbook"]) && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    <?php if (isset($_POST["searchbook"]) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        echo '<pre>';
-        print_r($_GET );
-        echo '</pre>';
-
-
-        echo 'say hellou  please call oparator, that i need instruction';
 
         $books = getSearchBook();
 
@@ -64,7 +63,7 @@ include_once '_partials/header.php';
 
         ?>
 
-       <!-- <div class="limiter">
+        <div class="limiter">
             <div class="container-table100">
                 <div class="wrap-table100">
                     <div class="table">
@@ -85,64 +84,31 @@ include_once '_partials/header.php';
 
 
                         <?php
-/*                        foreach ($books as $data) :
-                            */?>
+                        foreach ($books as $data) :
+                            ?>
                             <div class="row">
                                 <div class="cell" data-title="Title">
 
-                                    <a href="<?php /*echo $site_url */?>about-book.php?edit_id=<?php /*echo $data["book_id"]; */?>"
-                                       class="back-link text-warning "><?php /*echo plain($data["book_name"]); */?></a>
+                                    <a href="<?php echo $site_url ?>about-book.php?edit_id=<?php echo $data["book_id"]; ?>"
+                                       class="back-link text-warning "><?php echo plain($data["book_name"]); ?></a>
 
                                 </div>
                                 <div class="cell" data-title="Autor">
-                                    <?/*= plain($data["book_autor"]) */?>
+                                    <?= plain($data["book_autor"]) ?>
 
                                 </div>
                                 <div class="cell" data-title="Genre">
-                                    <?/*= plain($data["genre"]) */?>
+                                    <?= plain($data["genre"]) ?>
                                 </div>
                                 <div class="cell" data-title="Availability">
                                     Yes
                                 </div>
                             </div>
 
-                        <?php /*endforeach; */?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-        </div>-->
-
-
-
-        <div class="container bg-grey p-3 mb-5 mw">
-
-            <?php foreach ($books as $data) :?>
-            <table class=" table table-striped table-dark margin-bottom">
-
-                <tbody>
-
-                <tr >
-                    <th scope="row">Title</th>
-                    <!--<td><?php /*echo plain($data["book_name"])*/?></td>-->
-                 <td>
-                    <a href="<?php echo $site_url ?>about-book.php?edit_id=<?php echo $data["book_id"]; ?>"
-                       class="back-link text-warning "><?php echo plain($data["book_name"]); ?></a>
-                 </td>
-
-
-                </tr>
-                <tr>
-                    <th scope="row">Autor</th>
-                    <td><?php echo plain($data["book_autor"])?></td>
-                </tr>
-                <tr>
-                    <th scope="row">ISBN</th>
-                    <td><?php echo plain($data["genre"])?></td>
-                </tr>
-                </tbody>
-            </table>
-                <hr>
-            <?php endforeach;?>
         </div>
 
 

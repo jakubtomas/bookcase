@@ -96,16 +96,12 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 <label for="publisher">Publisher</label>
                 <input required type="text" name="publisher" placeholder="" value="<?= $value ['publisher']; ?>">
 
-<!--
-                <label for="desription">Desription</label>
-                <input required type="text" name="desription" placeholder="" value="<?/*= $value ['desription']; */?>">
--->             <!--poznamka do text arei mam problem dat hodnotu cez value ako nato ????-->
+
 
 
                 <label for="desription">Description</label>
-                <!--<input required type="text" name="desription" placeholder="">-->
-                <textarea class="form-control textarea" rows="5" id="desription" name="desription" value="<?= $value ['desription']; ?>"
-                          required></textarea>
+                <textarea  class="form-control textarea" rows="5" id="desription" name="desription"
+                          required><?php  echo $value ['desription'];?></textarea>
             </p>
 
             <p class="form-group">
@@ -172,7 +168,7 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                     <input type="hidden" name="about-book" value="1">
                 <?php endif; ?>
 
-                <label for="isbn">isbn</label>
+                <label for="isbn">Isbn</label>
                 <input required type="text" name="isbn" placeholder="" value="<?= $_SESSION['isbn']; ?>">
 
 
@@ -180,10 +176,10 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 <input required type="text" name="book_name" placeholder="" value="<?= $_SESSION['book_name']; ?>">
 
 
-                <label for="book_autor">book_autor</label>
+                <label for="book_autor">Book autor</label>
                 <input required type="text" name="book_autor" placeholder="" value="<?= $_SESSION['book_autor']; ?>">
 
-                <label for="genre">GENREEEEE</label>
+                <label for="genre">GENRE</label>
                 <!--<input required type="text" name="genre" placeholder="" value="<?/*= $_SESSION['genre']; */?>">-->
                 <input required class="datalist" list="genres" name="genre" placeholder="" value="<?= $_SESSION['genre'] ; ?>">
 
@@ -207,8 +203,11 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
 
 
 
-                <label for="desription">desription</label>
-                <input required type="text" name="desription" placeholder="" value="<?= $_SESSION['desription']; ?>">
+                <!--<label for="desription">Description</label>-->
+                <!--<input required type="text" name="desription" placeholder="" value="<?/*= $_SESSION['desription']; */?>">-->
+                <label for="desription">Description</label>
+                <textarea  class="form-control textarea" rows="5" id="desription" name="desription"
+                           required><?php  echo $_SESSION['desription'];?></textarea>
 
             </p>
 

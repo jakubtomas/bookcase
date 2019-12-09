@@ -68,8 +68,8 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
 
     //  poznamka presmerovat na 401 alebo 404 alebo na hlavnu stranku
     $_SESSION['messages'] = "You dont have permission";
-    header("Location: $site_url" . "index.php");
     exit("You dont have permission");
+
 
 }
 /// FORMULAR

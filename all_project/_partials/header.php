@@ -26,13 +26,16 @@ if ($page_name == "index") $page_name = "home";
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="<?=  $site_url?>assets/style.css">
+
+
 
 </head>
 
-<style>
-
+<!--<style>
 
     .bg {
+
         background-image: url("https://wallpaperaccess.com/full/253371.jpg");
         width: 100%;
         margin: 0 0 1em auto !important;
@@ -106,7 +109,9 @@ if ($page_name == "index") $page_name = "home";
         padding: 0;
         font-family: serif;
         text-align: center;
-        background-color: #337ab7;
+        /*background-color: #337ab7;*/
+        background-color: #343a40 !important;
+
     }
 
 
@@ -375,6 +380,10 @@ if ($page_name == "index") $page_name = "home";
         margin-left: 25%;
     }
 
+    .mytable td,{
+        padding: 0.35rem;
+
+    }
 
     /*zmenene
 
@@ -487,11 +496,11 @@ if ($page_name == "index") $page_name = "home";
         margin: 0;
     }
 
-    @media screen and (max-width: 768px) {
+    /*@media screen and (max-width: 768px) {
         .table {
             display: block;
         }
-    }
+    }*/
 
     .rowe {
         display: flex;
@@ -1132,6 +1141,16 @@ if ($page_name == "index") $page_name = "home";
             .mx {
                 max-width: 100px;
             }
+        .table td, .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+            width: 50%;
+        }
+    .mw {
+        max-width: 65%;
+    }
+
             /*.padding {
                 padding: 0 20px;
             }*/
@@ -1141,14 +1160,14 @@ if ($page_name == "index") $page_name = "home";
 
      }*/
 
-</style>
+</style>-->
 
 <body class="">
 <!--<body class="bg-dark">-->
 
 
 <nav class="navbar navbar-expand-sm navbar-dark ">
-    <a class="py-2" href="#">
+    <a class="py-2" href="<?= $site_url?>index.php">
         <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-JulUCb7w_GPOzi9Vc08MfHapHX6-xi7v5mTN6A0w4tq70-sn&s"
                 class=" rounded-corners img-fluid " alt="">
@@ -1180,7 +1199,7 @@ if ($page_name == "index") $page_name = "home";
 
 
 
-            <?php if (isset($_SESSION['email'])): ?>
+            <?php if (isset($_SESSION['email'])  && isset($_SESSION['id'] )  ): ?>
 
                 <li class="nav-item">
                     <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>user.php">Account</a>
