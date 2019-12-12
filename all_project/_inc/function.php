@@ -178,24 +178,14 @@ function getBookReservation()
 function getAllReservation()
 {
     global $conn;
-    $records = $conn->prepare('SELECT * FROM books inner join  reserve 
-                                ON books.book_id = reserve.book_id  order by  status'  );
+
+    $records = $conn->prepare('SELECT * FROM books 
+                                INNER JOIN  reserve ON books.book_id = reserve.book_id 
+                                INNER JOIN  users ON users.id = reserve.user_id 
+order by  status'  );
 
 
 
-    $records->execute();
-    $results = $records->fetchAll(PDO::FETCH_ASSOC);
-
-    return $results;
-}
-
-
-/*FUNCTION FOR EVENT*/
-function getEvents()
-{
-    global $conn;
-    $records = $conn->prepare('SELECT * FROM events');
-//$records->bindParam(':email', $_POST['email']);
     $records->execute();
     $results = $records->fetchAll(PDO::FETCH_ASSOC);
 

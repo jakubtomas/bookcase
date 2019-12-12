@@ -47,7 +47,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['email'] = $results  ["email"];
 
 
-                $_SESSION['messages'] = "Success login welcome to this website";
+                $_SESSION['messages'] = "You was successfully logged in";
 
 
 
@@ -61,7 +61,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         } else {
-            array_push($errorMessage, "you have to active your account via the link which was sending on your eamail");
+            array_push($errorMessage, "You have to activate your account via the link which was sent to your email");
         }
 
     } else {

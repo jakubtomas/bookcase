@@ -59,7 +59,6 @@ include_once '_partials/header.php';
         echo '</pre>';
 
 
-        echo 'say hellou  please call oparator, that i need instruction';
 
         $books = getSearchBook();
 

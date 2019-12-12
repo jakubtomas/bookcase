@@ -12,6 +12,13 @@ ako sa roby presmerovanie stranky  pozri video
 /*poznamka change the background color from black to white like on the another page*/
 
 
+/*
+ * 1 vytiahnem data pomocou $_GET['id']
+ * co je extract
+ * 2 . ukazat obrazok a input
+ * 3. uz iba poslanie pomocou $_POST['']
+ * 4. kontrola ako predtym pri posielani obrazka
+ * */
 if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     echo '<pre>';
@@ -19,7 +26,7 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
     echo '</pre>';
 
     echo '<pre>';
-    print_r($_SESSION );
+    print_r($_SESSION);
     echo '</pre>';
 
     if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
@@ -51,6 +58,11 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
 
     $result = getOneData();
 
+    echo '<pre>';
+    print_r($result);
+    echo '</pre>';
+
+
     ?>
 
 
@@ -75,8 +87,9 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 <input required type="text" name="book_autor" placeholder="" value="<?= $value ['book_autor']; ?>">
 
                 <label for="genre">Genre</label>
-                <!--<input required type="text" name="genre" placeholder="" value="<?/*= $value ['genre']; */?>">-->
-                <input required class="datalist" list="genres" name="genre" placeholder="" value="<?= $value ['book_autor']; ?>">
+                <!--<input required type="text" name="genre" placeholder="" value="<? /*= $value ['genre']; */ ?>">-->
+                <input required class="datalist" list="genres" name="genre" placeholder=""
+                       value="<?= $value ['book_autor']; ?>">
 
 
                 <datalist class="" id="genres">
@@ -96,12 +109,14 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 <label for="publisher">Publisher</label>
                 <input required type="text" name="publisher" placeholder="" value="<?= $value ['publisher']; ?>">
 
+                <label class="control-label">Book Img.</label>
+            <p><img src="../user_images/<?php echo $value["bookPic"]; ?>"   height="150" width="120"></p>
+            <input class="input-group" type="file" name="user_image" accept="image/*"/>
+            <input type="hidden" name="bookPic" value="<?php echo $value["bookPic"]; ?>">
 
-
-
-                <label for="desription">Description</label>
-                <textarea  class="form-control textarea" rows="5" id="desription" name="desription"
-                          required><?php  echo $value ['desription'];?></textarea>
+            <label for="desription">Description</label>
+            <textarea class="form-control textarea" rows="5" id="desription" name="desription"
+                      required><?php echo $value ['desription']; ?></textarea>
             </p>
 
             <p class="form-group">
@@ -127,7 +142,7 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
 
 
     echo '<pre>';
-    print_r($_SESSION );
+    print_r($_SESSION);
     echo '</pre>';
 
 
@@ -164,7 +179,7 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
               enctype="multipart/form-data">
             <p class="group">
 
-                <?php if (isset($_SESSION['about-book'] ) && !empty($_SESSION['about-book'] )) : ?>
+                <?php if (isset($_SESSION['about-book']) && !empty($_SESSION['about-book'])) : ?>
                     <input type="hidden" name="about-book" value="1">
                 <?php endif; ?>
 
@@ -180,8 +195,9 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 <input required type="text" name="book_autor" placeholder="" value="<?= $_SESSION['book_autor']; ?>">
 
                 <label for="genre">GENRE</label>
-                <!--<input required type="text" name="genre" placeholder="" value="<?/*= $_SESSION['genre']; */?>">-->
-                <input required class="datalist" list="genres" name="genre" placeholder="" value="<?= $_SESSION['genre'] ; ?>">
+                <!--<input required type="text" name="genre" placeholder="" value="<? /*= $_SESSION['genre']; */ ?>">-->
+                <input required class="datalist" list="genres" name="genre" placeholder=""
+                       value="<?= $_SESSION['genre']; ?>">
 
 
                 <datalist class="" id="genres">
@@ -193,36 +209,37 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
                 </datalist>
 
                 <label for="pages">Pages</label>
-                <input required type="number" name="pages" placeholder="" value="<?= $_SESSION['pages'] ; ?>">
+                <input required type="number" name="pages" placeholder="" value="<?= $_SESSION['pages']; ?>">
 
                 <label for="year">Year</label>
-                <input required type="number" name="year" placeholder="" value="<?= $_SESSION['year']  ; ?>">
+                <input required type="number" name="year" placeholder="" value="<?= $_SESSION['year']; ?>">
 
                 <label for="publisher">Publisher</label>
-                <input required type="text" name="publisher" placeholder="" value="<?= $_SESSION['publisher'] ; ?>">
+                <input required type="text" name="publisher" placeholder="" value="<?= $_SESSION['publisher']; ?>">
 
-
-
-                <!--<label for="desription">Description</label>-->
-                <!--<input required type="text" name="desription" placeholder="" value="<?/*= $_SESSION['desription']; */?>">-->
+                <label class="control-label">Book Img.</label>
+            <p><img src="../user_images/<?php echo $_SESSION['bookPic'] ; ?>"   height="150" width="120"></p>
+            <input class="input-group" type="file" name="user_image" accept="image/*"/>
+            <input type="hidden" name="bookPic" value="<?php echo $_SESSION['bookPic'] ; ?>">
+            
                 <label for="desription">Description</label>
-                <textarea  class="form-control textarea" rows="5" id="desription" name="desription"
-                           required><?php  echo $_SESSION['desription'];?></textarea>
+                <textarea class="form-control textarea" rows="5" id="desription" name="desription"
+                          required><?php echo $_SESSION['desription']; ?></textarea>
 
             </p>
 
             <p class="form-group">
-                <input name="book_id" type="hidden" value="<?php echo $_GET['edit_id']?>">
+                <input name="book_id" type="hidden" value="<?php echo $_GET['edit_id'] ?>">
                 <a href="<?php echo $site_url ?>admin-book.php" class="back-link text-warning ">back</a>
-            <!--poznamka  potrebne vyriesit  ked sa sem dostaneš z sekcie about boook tak sa
-            tam aj vratis pri stlaceny na tlacidlo back a to plati aj na ten formular 2 krat -->
+                <!--poznamka  potrebne vyriesit  ked sa sem dostaneš z sekcie about boook tak sa
+                tam aj vratis pri stlaceny na tlacidlo back a to plati aj na ten formular 2 krat -->
                 <input class="btn-sm btn-danger margin-bottom" type="submit" value="Update " name="update_book">
                 <!--test komentara-->
 
             </p>
         </form>
-        
-        
+
+
         <!--zrejem neposiela  book id pri druhom posielani nwm preco mozno pouzi $_POST['] -->
     </div>
     <?php

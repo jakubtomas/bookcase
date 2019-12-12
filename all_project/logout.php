@@ -9,7 +9,7 @@ session_destroy();
 
 
 
-$_SESSION['message'] = "uspesne odhlasen ";
+$_SESSION['message'] = "You have been logged out ";
 
 header("Location: $site_url" . "index.php");
 

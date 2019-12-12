@@ -29,7 +29,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     // check email =========================================
     if (empty($email)) {
 
-        array_push($desktopMessage, "you forgot email");
+        array_push($desktopMessage, "Email is required");
 
 
         $errorEmail = TRUE;
@@ -48,7 +48,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             */
 
         } else {
-            array_push($desktopMessage, "Email is not a valid");
+            array_push($desktopMessage, "Email is not valid");
 
 
             $permission = FALSE;
@@ -80,7 +80,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             // kontorola dlzky hesla
             /*2a1*/
             if (strlen($password) < 6 || strlen($password) > 150) {
-                array_push($desktopMessage, "password have to have minimum 6 values and max 150");
+                array_push($desktopMessage, "Invalid password : minimum charachters 6 and max 150");
 
                 $permission = FALSE;
 
@@ -92,7 +92,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             }*/
             /*2b*/
         } else {
-            array_push($desktopMessage, "Hesla  niesu zhodne ");;
+            array_push($desktopMessage, "Passwords dont match");;
 
             $permission = FALSE;
         }
@@ -110,7 +110,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if ($results) {
             $permission = FALSE;
-            array_push($desktopMessage, "Nasledujuci email už bol použity musis použit iny email ");
+            array_push($desktopMessage, "This email is not available");
 
         } /*else {
             array_push($desktopMessage, "thid email we dont have in our database" );
@@ -120,9 +120,6 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     }
 
-    /*
-            $stmt->bindParam(':email', $_POST['email'] );
-            $stmt->bindParam(':password', password_hash($_POST['password'] , PASSWORD_BCRYPT));*/
 
 
     if ($permission):
@@ -206,7 +203,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
             echo '            http://localhost:82/library/verify.php?email= ' . $email . '&hash=' . $hash;
 
-            $_SESSION['message'] = " Uspesna registracia";
+            $_SESSION['message'] = "Registration was successfull";
             header("Location: $site_url" . "login.php");
         else:
             $message = 'Sorry registration failed  ,Try again';

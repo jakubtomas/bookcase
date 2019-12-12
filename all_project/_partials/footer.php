@@ -2,7 +2,7 @@
 <script>
 
     function checkDelete() {
-        return confirm("Are you sure delete this data ?")
+        return confirm("Do you want to delete these data ?")
 
     }
 

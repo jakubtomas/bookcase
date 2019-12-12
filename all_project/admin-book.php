@@ -10,11 +10,25 @@ echo '</pre>';
 
 $value = getBooks();
 
+
+
+if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
+
+    echo '<div class="messageContainer">';
+    echo '<div class="alert  alert-success " role="alert">';
+    echo $_SESSION['messages'];
+
+    echo '<br>';
+    echo '</div>';
+    echo '</div>';
+
+    unset($_SESSION['messages']);
+}
+
+
+
 if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
-    echo 'ready reserve  tu ';
-    echo '<pre>';
-    print_r($_GET['reserve-ready']);
-    echo '</pre>';
+
 
     $query = $conn->prepare("
                 UPDATE reserve SET
@@ -30,7 +44,13 @@ if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
     ]);
 
     if ($update_post) {
-        echo 'uspesne changed';
+        echo '<div class="messageContainer">';
+        echo '<div class="alert  alert-success " role="alert">';
+        echo "Status was changed for";
+
+        echo '<br>';
+        echo '</div>';
+        echo '</div>';
     }
 
 
@@ -39,11 +59,6 @@ if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
 /*  get reserve reading */
 
 if (isset($_GET['reserve-reading']) && !empty($_GET['reserve-reading'])) {
-    echo 'reserve reading ';
-    echo '<pre>';
-    print_r($_GET['reserve-reading']);
-    echo '</pre>';
-
 
     $query = $conn->prepare("
                 UPDATE reserve SET
@@ -59,7 +74,15 @@ if (isset($_GET['reserve-reading']) && !empty($_GET['reserve-reading'])) {
     ]);
 
     if ($update_post) {
-        echo 'zmenil som aôosdfiahsôdlfkhasdôflkasjfdô';
+        echo '<div class="messageContainer">';
+        echo '<div class="alert  alert-success " role="alert">';
+
+        echo "Status was changed, user is already reading";
+
+
+        echo '<br>';
+        echo '</div>';
+        echo '</div>';
     }
 }
 
@@ -134,7 +157,7 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
         <h2>Add book</h2>
 
         <p>
-            Instruction : ISBN have to by only number without other symbols and have to consist of 10 or 13 numbers </p>
+            Instruction : ISBN have to be only number without other symbols and has to consist of 10 or 13 numbers </p>
         <?php
 
         if (isset($_SESSION['start']) || isset($_SESSION['isbn']) || isset($_SESSION['book_name']) || isset($_SESSION['book_autor']) || isset($_SESSION['desription'])) {
@@ -282,6 +305,8 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
                             <label for="publisher">Publisher</label>
                             <input required type="text" name="publisher" placeholder="">
 
+                            <label class="control-label">Book Img.</label>
+                            <input   class="input-group" type="file" name="user_image" accept="image/*"/>
 
                             <label for="desription">Description</label>
                             <!--<input required type="text" name="desription" placeholder="">-->
@@ -306,7 +331,7 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
     <?php if (isset($_GET['update-delete']) == 1) : ?>
 
 
-        <h2>Update and delete books</h2>
+        <h2>Edit and delete books</h2>
         <div class="limiter">
             <div class="container-table100">
                 <div class="wrap-table100">
@@ -393,7 +418,7 @@ onclick="return checkDelete()" > delete</a>';
 
 
         <?php if (empty($reserve)) {
-            echo '<h3>The library dont have any reservation </h3>'; }?>
+            echo '<h3>They are no reseravtions in this library</h3>'; }?>
 
 
 
@@ -403,10 +428,10 @@ onclick="return checkDelete()" > delete</a>';
                     <div class="row  rowTable  header">
 
                         <div class="cell">
-                            Book name
+                            Email
                         </div>
                         <div class="cell">
-                            Autor
+                            Book name
                         </div>
                         <div class="cell">
                             Status
@@ -428,25 +453,13 @@ onclick="return checkDelete()" > delete</a>';
                         <div class="row rowTable ">
 
                             <div class="cell" data-title="Name">
-                                <?= plain($data["book_name"]) ?>
+                                <?= plain($data["email"]) ?>
                             </div>
                             <div class="cell" data-title="Autor">
-                                <?= plain($data["book_autor"]) ?>
+                                <?= plain($data["book_name"]) ?>
                             </div>
                             <div class="cell" data-title="Status">
-                                <?php
-                                echo '<pre>';
-                                print_r($data["status"]);
-                                echo '</pre>';
 
-                                if ($data["status"] == 1) {
-                                    echo 'READY ';
-                                } elseif ($data["status"] == 2) {
-                                    echo 'READING';
-                                } else {
-                                    echo 'Unprepared';
-                                }
-                                ?>
                             </div>
 
                             <div class="cell" data-title="Posibility">
@@ -471,7 +484,7 @@ onclick="return checkDelete()" > delete</a>';
 
                                     echo '<a class="link delete-link" href=" ' . $site_url . '_admin/delete-item.php?delete_reservation=' . $data ['id'] . '&adminreservation=1" 
 class="delete-link text-muted glyphicon glyphicon-remove"
-onclick="return checkDelete()" > delete reserve </a>';
+onclick="return checkDelete()" > delete reservation </a>';
 
 
                                 }

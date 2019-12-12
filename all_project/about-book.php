@@ -50,10 +50,7 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $status = getBookReservation();
 
-    echo  count($status);
-    if ($status) {
-        echo 'mamae status viac nez 0';
-    }
+
 
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         $reserve = getRecordReserve($book[0]['book_id']);
@@ -70,13 +67,7 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
 } elseif ($_POST ) {
     if (isset($_POST['reserve'])) {
-        echo "mam reserve";
-        echo '<br>';
 
-        /*1 udaje  2 kontrola 3 query 4 succes 5 presmerovanie stranky*/
-        echo $_POST['book_id'];
-        echo '<br>';
-        echo $_SESSION['id'];
 
         $book_id = $_POST['book_id'];
         $user_id = $_SESSION['id'];
@@ -97,28 +88,23 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
         ]);
 
         if ($insert) {
-            echo 'success add argument';
-            $message = "Reservation success";
+
+            $message = "Reservation  was successful ";
 
         }
 
         if (isset($message)) {
             echo '<div class="alert alert-success">';
-            echo '<strong>Success!</strong> Reservation you can change in Account';
+            echo '<strong>Success!</strong> You can change the reservation on your profile page';
             echo '</div>';
 
             $book = getOneBook($book_id);
 
         }
 
-    if (isset($_POST['favorite'])) {
-        echo "mam favorite";
 
-    }
 
-    if (isset($_POST['update'])) {
-        echo "mam update";
-    }
+
     if (isset($_POST['delete']) && $_SESSION['id'] ==1 && $_POST['book_id'] ) {
 
 
@@ -148,8 +134,11 @@ echo '</pre>';
         <div class="col-md-6">
             <div class="rowe no-gutters  overflow-hidden flex-md-row mb-4  position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <img class="img-book"
+                    <!--<img class="img-book"
                          src="https://mrtns.eu/tovar/_l/655/l655839.jpg?v=1574150481" alt="book">
+-->
+                    <img class="img-book"
+                         src="<?php echo $site_url.'user_images/'. $value["bookPic"]?>" alt="book">
 
 
                 </div>
@@ -168,7 +157,7 @@ echo '</pre>';
 
                     <p class="mb-auto"><b>Vydavateľ:</b> <?php echo $value["publisher"] ?></p>   <!--potrebne dokoncit-->
                     <p class="mb-auto"><b>ISBN:</b> <?php echo $value["isbn"] ?></p>
-                    <p class="mb-auto"><b>Poč.strán:</b> <?php echo $value["pages"] ?></p>
+                    <p class="mb-auto"><b>Year fo publishing</b> <?php echo $value["pages"] ?></p>
                     <p class="mb-auto"><b>Rok vydania:</b> <?php echo $value["made_year"] ?></p>
                     <p>
                         <!--poznamka prva vec send instruction Laco , pato , jakub  and some example -->
@@ -179,7 +168,7 @@ echo '</pre>';
                                        -->
                <?php if (isset($_SESSION['id']) && !empty($_SESSION['id'] ) ) : ?>
                     <?php if ($reserve == 1) : ?>
-                        <p class="mb-auto">INFO : This book someone reserved</p>
+                        <p class="mb-auto">INFO : This book was already reserved</p>
                         <br>
                     <?php endif; ?>
 
@@ -205,22 +194,13 @@ echo '</pre>';
                     <!--Only the admin section -->
 
                    <?php if ( $_SESSION['id'] ==1 ):?>
-                <!--    <form name="myLetters" action="about-book.php" method="POST">
-                        <input name="book_id" type="hidden" value="<?/*= $value['book_id'] */?>">
-                        <input type="submit" class="btn btn-success btn-sm btn-reserve button-books" name="update"
-                               value="Update">
-                        <input type="submit" class="btn btn-success btn-sm btn-reserve button-books" name="delete"
-                               value="Delete">
 
-                    </form>
--->                 <!--<a href="http://google.com" class="button btn btn-success mx">Update</a>-->
                <a href="<?php echo $site_url . '_admin/edit-item.php?edit_id='.$value["book_id"].'&place=1'; ?>" class="button btn btn-success mx">Update</a>
                <a href="<?php echo $site_url . '_admin/delete-item.php?delete_id='.$value["book_id"]; ?>" class="button btn btn-success mx" onclick="return checkDelete()">Delete</a>
-               <!--<a href="<?php /*echo $site_url . '_admin/delete-item.php?delete_id='. $data ['book_id']  ; */?>" class="button btn btn-success mx">Delete</a>-->
-<!--$site_url . '_admin/delete-item.php?delete_id=' . $data ['book_id'] . '-->
+
                    <?php endif;   ?>
                <?php else:?>
-                   <p> INFO : Only the registration users can  reserve this book</p>
+                   <p> INFO : Only the registered users can  reserve this book</p>
                <?php endif;   ?>
                     <p></p>
                     <p><b> Description:</b></p>
@@ -237,83 +217,7 @@ echo '</pre>';
     </div>
 
     <?php endforeach; ?>
-    <!--    <hr>
 
-        <p></p>
-
-        <h2> You might also like</h2>
-        <p></p>
-
-
-        <div class="rowe also-like flex-wrap">
-
-
-            <div class="col-md-3 ">
-
-                <div class="view overlay">
-                    <img class="card-img-top" src="https://mrtns.eu/tovar/_l/678/l678795.jpg?v=1573813064" alt="Card image cap">
-
-
-                </div>
-
-
-                <button type="button" class="btn  btn-success btn-sm img-borrow "> Borrow</button>
-
-
-            </div>
-
-
-            <div class="col-md-3">
-
-
-                <div class="view overlay">
-                    <img class="card-img-top" src="https://mrtns.eu/tovar/_l/678/l678795.jpg?v=1573813064" alt="Card image cap">
-
-                </div>
-
-
-                <button type="button" class="btn  btn-success btn-sm img-borrow ">Borrow</button>
-
-
-            </div>
-
-
-            <div class="col-md-3">
-
-
-                <div class="view overlay">
-                    <img class="card-img-top" src="https://mrtns.eu/tovar/_l/678/l678795.jpg?v=1573813064" alt="Card image cap">
-                    <a href="#!">
-
-                    </a>
-                </div>
-
-
-                <button type="button" class="btn  btn-success btn-sm img-borrow ">Borrow</button>
-
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="view overlay">
-                    <img class="card-img-top" src="https://mrtns.eu/tovar/_l/678/l678795.jpg?v=1573813064" alt="Card image cap">
-
-
-                </div>
-
-
-                <button type="button" class="btn  btn-success btn-sm img-borrow"> Borrow</button>
-
-            </div>
-        </div>
-
-
-
-        <hr>
-        <h2 class="availability"> Availability: </h2>
-
-    -->
 
     <table class="table table-striped info-panel">
 

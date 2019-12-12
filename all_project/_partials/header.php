@@ -63,7 +63,7 @@ if ($page_name == "index") $page_name = "home";
             <?php if (isset($_SESSION['id']) && $_SESSION['id'] == 1): ?>
 
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>admin-book.php">Admin book</a>
+                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>admin-book.php">Admin </a>
                 </li>
             <?php endif; ?>
 
@@ -86,13 +86,13 @@ if ($page_name == "index") $page_name = "home";
 
 
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>logout.php">Sign out</a>
+                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>logout.php">Logout</a>
                 </li>               <!--poznamka odhlasit sa anglicky-->
 
 
             <?php else: ?>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>login.php">Sign in </a>
+                    <a class="nav-link waves-effect waves-light" href="<?= $site_url ?>login.php">Login </a>
                 </li>   <!--poznamka prihlasit sa anglicky-->
 
             <?php endif; ?>

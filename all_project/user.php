@@ -31,7 +31,8 @@ echo '</pre>';
     <h1 class="header">My reservation</h1>
 
     <?php if (!$value) {
-        echo '<h3>Now you dont have reserve any book</h3>';
+
+        echo '<h3>You dont have any reserved book at the moment</h3>';
 
         die();
     }?>
@@ -87,7 +88,7 @@ echo '</pre>';
 
                                     echo '<a class="link delete-link" href=" ' . $site_url . '_admin/delete-item.php?delete_reservation=' . $data ['id'] . '" 
 
-onclick="return checkDelete()" > delete reserve </a>';
+onclick="return checkDelete()" > delete reservation </a>';
                                     }
                                 } ?>
                             </div>
