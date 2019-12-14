@@ -179,7 +179,7 @@ function getAllReservation()
 {
     global $conn;
 
-    $records = $conn->prepare('SELECT * FROM books 
+    $records = $conn->prepare('SELECT * , reserve.id as idReservation FROM books 
                                 INNER JOIN  reserve ON books.book_id = reserve.book_id 
                                 INNER JOIN  users ON users.id = reserve.user_id 
 order by  status'  );

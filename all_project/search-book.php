@@ -72,7 +72,7 @@ include_once '_partials/header.php';
 
         } else {
             echo '<div class="alert  alert-success " role="alert">';
-            echo 'Success we have something ';
+            echo 'Successfully found ';
             echo '</div>';
         }
 

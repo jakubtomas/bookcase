@@ -228,19 +228,27 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
             if (!empty($_SESSION['publisher'])) {
                 echo '<label for="publisher">Publisher</label>';
                 echo ' <input required type="text" name="publisher" placeholder="" value="' . $_SESSION['publisher'] . '">';
-
+                echo '<br>';
+                echo '<label class="control-label">Book Img.</label>';
+                echo '<input   class="input-group" type="file" name="user_image" accept="image/*"/>';
             } else {
                 echo '<label for="publisher">Publisher</label>';
                 echo ' <input required class = "bc-danger" type="text" name="publisher" placeholder="" value="">';
-
+                echo '<br>';
+                echo '<label class="control-label">Book Img.</label>';
+                echo '<input   class="input-group" type="file" name="user_image" accept="image/*"/>';
             }
 
             if (!empty($_SESSION['desription'])) {
+                /*<label class="control-label">Book Img.</label>
+                            <input   class="input-group" type="file" name="user_image" accept="image/*"/>*/
+                echo '<br>';
                 echo '<label for="desription">Description</label>';
                 /*echo ' <input required type="text" name="desription"   value="' . $_SESSION['desription'] . '">';*/
                 echo '<textarea class="form-control textarea" rows="5" id="desription" name="desription" 
                                       required > ' . $_SESSION['desription'] . '</textarea>';
             } else {
+                echo '<br>';
                 echo '<label for="desription">Description</label>';
                 /*echo ' <input required  class = "bc-danger" type="text" name="desription" placeholder="">';*/
                 echo '<textarea class="form-control textarea bc-danger" rows="5" id="desription" name="desription"
@@ -305,9 +313,11 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
                             <label for="publisher">Publisher</label>
                             <input required type="text" name="publisher" placeholder="">
 
+                            <br>
+
                             <label class="control-label">Book Img.</label>
                             <input   class="input-group" type="file" name="user_image" accept="image/*"/>
-
+                            <br>
                             <label for="desription">Description</label>
                             <!--<input required type="text" name="desription" placeholder="">-->
                             <textarea class="form-control textarea" rows="5" id="desription" name="desription"
@@ -459,19 +469,31 @@ onclick="return checkDelete()" > delete</a>';
                                 <?= plain($data["book_name"]) ?>
                             </div>
                             <div class="cell" data-title="Status">
+                                <?php
+                                echo '<pre>';
+                                print_r($data["status"]);
+                                echo '</pre>';
 
+                                if ($data["status"] == 1) {
+                                    echo 'READY ';
+                                } elseif ($data["status"] == 2) {
+                                    echo 'READING';
+                                } else {
+                                    echo 'Unprepared';
+                                }
+                                ?>
                             </div>
 
                             <div class="cell" data-title="Posibility">
                                 <?php
                                 if ($value) {
 
-                                    echo '<a class="link btn-success" href=" ' . $site_url . 'admin-book.php?reserve=1&reserve-ready=' . $data ['id'] . '" 
+                                    echo '<a class="link btn-success" href=" ' . $site_url . 'admin-book.php?reserve=1&reserve-ready=' . $data ['idReservation'] . '" 
 >Book is ready </a>';
                                     echo '<br>';
                                     /*tusom*/
 
-                                    echo '<a class="link delete-link" href=" ' . $site_url . 'admin-book.php?reserve=1&reserve-reading=' . $data ['id'] . '" 
+                                    echo '<a class="link delete-link" href=" ' . $site_url . 'admin-book.php?reserve=1&reserve-reading=' . $data ['idReservation'] . '" 
  > User is reading </a>';                                                                           /*pridam adresu  a budem vediet ze header admin reservation*/
 
                                 }
