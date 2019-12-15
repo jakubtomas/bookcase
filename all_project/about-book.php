@@ -154,13 +154,13 @@ echo '</pre>';
 
 
                     <h2><?php echo $value["book_name"] ?></h2>
-                    <p> <?php echo $value["book_autor"] ?></p>
+                    <p class="mb-auto"> <b>Autor :</b><?php echo $value["book_autor"] ?></p>
 
                     <p class="mb-auto"><b>Publisher:</b> <?php echo $value["publisher"] ?></p>
                     <!--potrebne dokoncit-->
                     <p class="mb-auto"><b>ISBN:</b> <?php echo $value["isbn"] ?></p>
                     <p class="mb-auto"><b>Pages</b> <?php echo $value["pages"] ?></p>
-                    <p class="mb-auto"><b>Made of year</b> <?php echo $value["made_year"] ?></p>
+                    <p class="mb-auto"><b>Year</b> <?php echo $value["made_year"] ?></p>
                     <p>
                         <!--poznamka prva vec send instruction Laco , pato , jakub  and some example -->
                         <!-- poznamka POtrebne vytvorit nove tabulky do databazi  Vydavatel POcet stran rok vydania -->

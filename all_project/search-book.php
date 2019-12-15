@@ -11,32 +11,6 @@ include_once '_partials/header.php';
 <div class="white min-vh-100">
     <div class="">
 
-<!--
-
-        <form action="search-book.php" method="POST" class="form-inline">
-            <div class="form-group mx-sm-3 ">
-
-            <label for="search" class="mr-sm-2 ">Search books </label>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="search" name="search">
-
-            </div>
-            <input class="btn-sm btn-primary " type="submit" value="Search" name="searchbook">
-        </form>
-
--->
-
-
-  <!--      <form action="search-book.php" method="GET" class="form-inline justify-content-center">
-            <div class="form-group mx-sm-3 ">
-
-                <label for="search" class="mr-sm-2 ">Search books </label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="search" name="search">
-
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg"  value="Search " name="searbook">Search</button>
-        </form>
--->
-            <!--<input class="btn-sm btn-primary " type="submit" value="Search" name="searchbook">-->
 
         <div class="px-2">
             <form action="search-book.php" method="GET" class="justify-content-center">
@@ -60,7 +34,25 @@ include_once '_partials/header.php';
 
 
 
-        $books = getSearchBook();
+        if(isset($_GET["page"]) && !empty($_GET['page']))
+        {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $record_per_page = 3; // number of record for page
+        $start_from = ($page-1)*$record_per_page;
+        echo '<pre>';
+
+
+        print_r($record_per_page);
+        echo '</pre>';
+
+
+        /*$books = getSearchBookwithPagination($start_from, $record_per_page)*/;
+        $books =getSearchBook();
 
         if (empty($books)) {
             echo '<div class="alert  alert-danger " role="alert">';
@@ -77,54 +69,6 @@ include_once '_partials/header.php';
         }
 
         ?>
-
-       <!-- <div class="limiter">
-            <div class="container-table100">
-                <div class="wrap-table100">
-                    <div class="table">
-                        <div class="row header">
-                            <div class="cell">
-                                Title
-                            </div>
-                            <div class="cell">
-                                Autor
-                            </div>
-                            <div class="cell">
-                                Genre
-                            </div>
-                            <div class="cell">
-                                Availability
-                            </div>
-                        </div>
-
-
-                        <?php
-/*                        foreach ($books as $data) :
-                            */?>
-                            <div class="row">
-                                <div class="cell" data-title="Title">
-
-                                    <a href="<?php /*echo $site_url */?>about-book.php?edit_id=<?php /*echo $data["book_id"]; */?>"
-                                       class="back-link text-warning "><?php /*echo plain($data["book_name"]); */?></a>
-
-                                </div>
-                                <div class="cell" data-title="Autor">
-                                    <?/*= plain($data["book_autor"]) */?>
-
-                                </div>
-                                <div class="cell" data-title="Genre">
-                                    <?/*= plain($data["genre"]) */?>
-                                </div>
-                                <div class="cell" data-title="Availability">
-                                    Yes
-                                </div>
-                            </div>
-
-                        <?php /*endforeach; */?>
-                    </div>
-                </div>
-            </div>
-        </div>-->
 
 
 
@@ -151,7 +95,7 @@ include_once '_partials/header.php';
                 </tr>
                 <tr>
                     <th scope="row">ISBN</th>
-                    <td><?php echo plain($data["genre"])?></td>
+                    <td><?php echo plain($data["isbn"])?></td>
                 </tr>
                 </tbody>
             </table>
@@ -160,7 +104,19 @@ include_once '_partials/header.php';
         </div>
 
 
-    <?php } ?>
+        <?php
+        $countBooks = getcountBooks();
+
+        $total_pages = ceil($countBooks[0] / $record_per_page);
+        echo  "page " .$page;
+        echo '<br>';
+        echo '<br>';
+        for ($i = 1 ; $i<= $total_pages; $i++) {
+//            echo '<a class="link edit-link" href=" ' . $site_url . 'search-book.php?&searchbook=&page='. $i .'" class="edit-link "> '.$i.' </a>';
+        }
+        echo '<br>';?>
+
+    <?php echo '<br>';} ?>
 </div>
 
 

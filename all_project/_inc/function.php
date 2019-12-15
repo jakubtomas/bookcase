@@ -22,6 +22,39 @@ function getBooks()
 }
 
 
+function getBookswithpagination($start_from, $record_per_page)
+{
+    global $conn;
+
+
+    $query = $conn->prepare("SELECT * FROM books order by book_name 
+            DESC  LIMIT  {$start_from},{$record_per_page}");
+
+    /*$stmt->bindParam(':username', $start_from);*/
+    $query->execute(/*array($start_from)*/);
+
+    if ($query->rowCount()) {
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    } else {
+        $results = [];
+    }
+
+    return $results;
+}
+
+function getcountBooks()
+{
+    global $conn;
+    $records = $conn->prepare('SELECT count(*) FROM books');
+
+    $records->execute();
+    $results = $records->fetchAll(PDO::FETCH_COLUMN);
+
+    return $results;
+}
+
+
 function getOneData()
 {
 
@@ -99,6 +132,49 @@ function getSearchBook()
         $q = plain($_GET['search']);
     }
     
+
+
+    $query->execute([
+        'isbn'       => "%$q%",
+        'book_name'  => "%$q%",
+        'book_autor' => "%$q%",
+        'genre'      => "%$q%",
+        'desription' => "%$q%"
+    ]);
+
+    if ($query->rowCount()) {
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+    } else {
+        $results = [];
+    }
+
+    return $results;
+
+}
+
+function getSearchBookwithPagination($start_from, $record_per_page)
+{
+    global $conn;
+    $query = $conn->prepare("SELECT *  FROM books 
+                             WHERE  isbn LIKE :isbn
+                             OR book_name LIKE :book_name
+                             OR book_autor LIKE :book_autor 
+                             OR genre LIKE  :genre
+                             OR desription LIKE :desription
+                              ORDER BY book_name
+                            DESC  LIMIT  {$start_from},{$record_per_page}
+                                 ");
+
+
+    if (empty($_GET['search'])) {
+        $q = plain($_GET['searchbook']);
+    }else {
+
+        $q = plain($_GET['search']);
+    }
+
 
 
     $query->execute([

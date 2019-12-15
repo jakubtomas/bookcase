@@ -229,7 +229,7 @@ include_once '_partials/header.php';
 
 
 
-<h1 class="loginwords">Registration users</h1>
+<h1 class="loginwords">Sign up</h1>
 <span class="loginwords">or <a  class="loginwords" href="login.php">login here</a></span>
 
 

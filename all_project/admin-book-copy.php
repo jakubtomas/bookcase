@@ -4,6 +4,9 @@ require_once "_inc/config.php";
 require_once "_inc/function.php";
 include_once '_partials/header.php';
 
+echo '<pre>';
+print_r($_SESSION );
+echo '</pre>';
 
 $value = getBooks();
 
@@ -337,40 +340,6 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
     <!--SECTION UPDATE BOOK===============================================-->
     <?php if (isset($_GET['update-delete']) == 1) : ?>
 
-        <?php
-
-
-
-
-        if(isset($_GET["page"]) && !empty($_GET['page']))
-        {
-            $page = $_GET["page"];
-        }
-        else
-        {
-            $page = 1;
-        }
-        $record_per_page = 3; // number of record for page
-        $start_from = ($page-1)*$record_per_page;
-        echo '<pre>';
-        
-
-        print_r($record_per_page);
-        echo '</pre>';
-
-
-        $value = getBookswithpagination($start_from, $record_per_page);
-
-
-
-/*        $value = getBookswithpagination();*/
-
-        /*echo '<pre>';
-        print_r($value);
-        echo '</pre>';*/
-        
-        ?>
-
 
         <h2>Edit and delete books</h2>
         <div class="limiter">
@@ -435,20 +404,6 @@ onclick="return checkDelete()" > delete</a>';
 
                         <?php endforeach; ?>
                     </div>
-
-
-                    <?php
-                    $countBooks = getcountBooks();
-
-                    $total_pages = ceil($countBooks[0] / $record_per_page);
-                    echo '<br>';
-                    echo  "page " .$page;
-                    echo '<br>';
-                        echo '<br>';
-                    for ($i = 1 ; $i<= $total_pages; $i++) {
-                        echo '<a class="link edit-link" href=" ' . $site_url . 'admin-book.php?update-delete=1&page='. $i .'" class="edit-link "> '.$i.' </a>';
-                    }
-                    ?>
                 </div>
             </div>
         </div>

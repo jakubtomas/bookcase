@@ -48,63 +48,8 @@ if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
     </div>
 
 
-    <div class="card-deck">
-        <div class="card ">
-            <img class="card-img-top"
-                 src="https://spectator.imgix.net/content/uploads/2019/09/Anthony-Quinn.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=820&h=550"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Event name </h5>
-                <p class="card-text">Description</p>
-                <p class="card-text">
-                    <small class="text-muted"> 12 November 2019</small>
-                </p>
-                <a
-                        class="button text-primary is-outlined is-rounded primary-bg-hover primary-text primary-border text-light-hover "
-                        href="">
-                    Learn More...
 
-                </a>
-            </div>
-        </div>
-        <div class="card ">
-            <img class="card-img-top"
-                 src="https://spectator.imgix.net/content/uploads/2019/09/Anthony-Quinn.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=820&h=550"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Event name </h5>
-                <p class="card-text">Description</p>
-                <p class="card-text">
-                    <small class="text-muted"> 12 November 2019</small>
-                </p>
-                <a
-                        class="button text-primary is-outlined is-rounded primary-bg-hover primary-text primary-border text-light-hover "
-                        href="">
-                    Learn More...
 
-                </a>
-            </div>
-        </div>
-        <div class="card ">
-            <img class="card-img-top"
-                 src="https://spectator.imgix.net/content/uploads/2019/09/Anthony-Quinn.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=820&h=550"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Event name </h5>
-                <p class="card-text">Description</p>
-                <p class="card-text">
-                    <small class="text-muted"> 12 November 2019</small>
-                </p>
-                <a
-                        class="button text-primary is-outlined is-rounded primary-bg-hover primary-text primary-border text-light-hover "
-                        href="">
-                    Learn More...
 
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <hr>
 
 <?php include_once '_partials/footer.php'; ?>

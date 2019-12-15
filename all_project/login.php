@@ -113,7 +113,7 @@ if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
 
 
 <h1 class="loginwords">Login</h1>
-<span class="loginwords">or  <a  class="loginwords" href="<?= $site_url ?>register.php">Registration</a></span>
+<span class="loginwords">or  <a  class="loginwords" href="<?= $site_url ?>register.php">Sign up</a></span>
 
 
 
