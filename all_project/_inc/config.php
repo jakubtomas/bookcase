@@ -16,7 +16,7 @@ define( 'APP_PATH', realpath(__DIR__ . '/htdocs/'));
 
 $server = 'localhost';
 $username = 'root';
-$password = 'root';
+$password = '';
 $database = 'bookcase';
 
 try{

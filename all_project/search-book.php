@@ -28,8 +28,9 @@ include_once '_partials/header.php';
 
     <?php if (isset($_GET["searchbook"]) && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
+        echo "I am here ";
         echo '<pre>';
-        print_r($_GET );
+        print_r($_GET["search"] );
         echo '</pre>';
 
 
@@ -42,17 +43,28 @@ include_once '_partials/header.php';
         {
             $page = 1;
         }
-        $record_per_page = 3; // number of record for page
+        $record_per_page = 5; // number of record for page
         $start_from = ($page-1)*$record_per_page;
+
+
+
         echo '<pre>';
-
-
         print_r($record_per_page);
         echo '</pre>';
 
 
         /*$books = getSearchBookwithPagination($start_from, $record_per_page)*/;
-        $books =getSearchBook();
+        $books =getSearchBook($start_from, $record_per_page);
+        $count = getCountSearchBooks();
+        $count = $count[0];
+
+        echo '<pre>';
+        print_r($books);
+        echo '</pre>';
+        
+        echo '<pre>';
+        print_r($count);
+        echo '</pre>';
 
         if (empty($books)) {
             echo '<div class="alert  alert-danger " role="alert">';
@@ -105,14 +117,24 @@ include_once '_partials/header.php';
 
 
         <?php
-        $countBooks = getcountBooks();
+        $countBooks = getCountSearchBooks();
+
+        echo '<pre>';
+        print_r($countBooks[0]);
+        echo '</pre>';
 
         $total_pages = ceil($countBooks[0] / $record_per_page);
+        
+        
+        echo '<pre>';
+        print_r($total_pages);
+        echo '</pre>';
+        
         echo  "page " .$page;
         echo '<br>';
         echo '<br>';
         for ($i = 1 ; $i<= $total_pages; $i++) {
-//            echo '<a class="link edit-link" href=" ' . $site_url . 'search-book.php?&searchbook=&page='. $i .'" class="edit-link "> '.$i.' </a>';
+            echo '<a class="link edit-link" href=" ' . $site_url . 'search-book.php?&searchbook=&search='. $_GET["search"] .'&page='. $i .'" class="edit-link "> '.$i.' </a>';
         }
         echo '<br>';?>
 

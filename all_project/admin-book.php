@@ -355,7 +355,10 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
         echo '<pre>';
         
 
+        print_r($start_from);
+        echo '<br>';
         print_r($record_per_page);
+
         echo '</pre>';
 
 
@@ -363,12 +366,8 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
 
 
 
-/*        $value = getBookswithpagination();*/
 
-        /*echo '<pre>';
-        print_r($value);
-        echo '</pre>';*/
-        
+
         ?>
 
 
@@ -439,7 +438,11 @@ onclick="return checkDelete()" > delete</a>';
 
                     <?php
                     $countBooks = getcountBooks();
-
+                    
+                    echo '<pre>';
+                    print_r($countBooks);
+                    echo '</pre>';
+                    
                     $total_pages = ceil($countBooks[0] / $record_per_page);
                     echo '<br>';
                     echo  "page " .$page;

@@ -86,8 +86,6 @@ function getOneData()
 function getOneBook($id)
 {
 
-
-
     global $conn;
 
 
@@ -106,16 +104,21 @@ function getOneBook($id)
     return $results;
 }
 
-function getSearchBook()
+function getSearchBook($start_from, $record_per_page)
 {
     global $conn;
-    $query = $conn->prepare("SELECT *  FROM books 
+    $query = $conn->prepare("SELECT  *  FROM books 
                              WHERE  isbn LIKE :isbn
                              OR book_name LIKE :book_name
                              OR book_autor LIKE :book_autor 
                              OR genre LIKE  :genre
                              OR desription LIKE :desription
+                    order by  book_name
+                DESC  LIMIT  {$start_from},{$record_per_page}
                                  ");
+
+    /* $query = $conn->prepare("SELECT * FROM books order by book_name
+            DESC  LIMIT  {$start_from},{$record_per_page}");*/
 
     /*if (empty($_POST['search'])) {
         $q = plain($_POST['searchbook']);
@@ -144,6 +147,59 @@ function getSearchBook()
 
     if ($query->rowCount()) {
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+    } else {
+        $results = [];
+    }
+
+    return $results;
+
+}
+
+function getCountSearchBooks()
+{
+    global $conn;
+    $query = $conn->prepare("SELECT  COUNT(*)  FROM books 
+                             WHERE  isbn LIKE :isbn
+                             OR book_name LIKE :book_name
+                             OR book_autor LIKE :book_autor 
+                             OR genre LIKE  :genre
+                             OR desription LIKE :desription
+                    order by  book_name
+                DESC  LIMIT  0,10
+                                 ");
+
+    /* $query = $conn->prepare("SELECT * FROM books order by book_name
+            DESC  LIMIT  {$start_from},{$record_per_page}");*/
+
+    /*if (empty($_POST['search'])) {
+        $q = plain($_POST['searchbook']);
+    }else {
+
+    $q = plain($_POST['search']);
+    }*/
+
+
+    if (empty($_GET['search'])) {
+        $q = plain($_GET['searchbook']);
+    }else {
+
+        $q = plain($_GET['search']);
+    }
+
+
+
+    $query->execute([
+        'isbn'       => "%$q%",
+        'book_name'  => "%$q%",
+        'book_autor' => "%$q%",
+        'genre'      => "%$q%",
+        'desription' => "%$q%"
+    ]);
+
+    if ($query->rowCount()) {
+        $results = $query->fetchAll(PDO::FETCH_COLUMN);
 
 
     } else {

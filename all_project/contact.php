@@ -6,7 +6,7 @@ include_once '_partials/header.php';
 ?>
 
 
-
+<!--<div class="bg-contact2" style="background-image: url('/*images/bg-01.jpg*/');">-->
 <div class="white">
 
     <div class="container">
