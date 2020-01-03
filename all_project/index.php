@@ -6,17 +6,9 @@ include_once '_partials/header.php';
 
 
 if (isset($_POST['searchBook']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo 'ejha';
-
-
-
 
     $value = getSearchBook();
-
-
 }
-
-
 
 if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
 
@@ -31,10 +23,7 @@ if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
     unset($_SESSION['messages']);
 }
 
-
 ?>
-
-
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg">
         <div class="col-md-5 p-lg-5 mx-auto my-5">
             <h1 class="display-4 font-weight-bold text-white">Welcome to our Library</h1>

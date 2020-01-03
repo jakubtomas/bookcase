@@ -10,11 +10,11 @@ require 'vendor/autoload.php';
 
 
 
- function sendEmail($mail,$subject, $messagebody)
+ function sendEmail($email,$subject, $messagebody)
 {
 
 // potrebne zmenit email adresu , subject , message body a vyskusat ,, pozor na pridavanie premennych do uvodzoviek
-
+//  nastavit adresu  www.hotspot attd verification hash code atd
 
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -22,7 +22,7 @@ $mail = new PHPMailer(true);
 try {
     //Server settings
     //$mail->SMTPDebug = 1;                      // Enable verbose debug output
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;
@@ -33,15 +33,15 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');
+    $mail->setFrom('from@example.com', 'Library');
 
-    $mail->addAddress('tomasjakub21@gmail.com');     // Add a recipient
+    $mail->addAddress($email);     // Add a recipient
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here587t';
-    $mail->Body    = 'This 587 good tento funguje the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $subject;
+    $mail->Body    = $messagebody;
+    $mail->AltBody = $messagebody;
 
     $mail->send();
     echo 'Message has been sent';
@@ -50,3 +50,51 @@ try {
 }
 
 }
+
+
+
+function sendContactEmail($email,$name,$message)
+{
+
+// potrebne zmenit email adresu , subject , message body a vyskusat ,, pozor na pridavanie premennych do uvodzoviek
+//  nastavit adresu  www.hotspot attd verification hash code atd
+
+// Instantiation and passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        
+        //$mail->SMTPDebug = 1;                      // Enable verbose debug output
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = 'tls';// Enable SMTP authentication
+        $mail->Username   = 'jakubshoop@gmail.com';                     // SMTP username
+        $mail->Password   = 'iamrabbit';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+        $mail->Port       = 587;                                     // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom($email, $name);
+
+        $mail->addAddress("jakub.tomas@akademiasovy.sk");     // Add a recipient
+        $mail->addReplyTo($email,$name);
+
+
+
+
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = "Email from library";
+        $mail->Body    =$message;
+        $mail->AltBody = $message;
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+}
+

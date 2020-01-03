@@ -35,7 +35,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($results) {
         // array_push($errorMessage, "Nasledujuci email  máme v databaze");
-        if ($results ['active_account'] == 1) {
+        if ($results ['active_account'] == 2) {
 
             echo '<pre>';
             print_r(password_verify(plain(trim($_POST['password'])), $results["password"]));
@@ -61,7 +61,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         } else {
-            array_push($errorMessage, "You have to activate your account via the link which was sent to your email");
+            array_push($errorMessage, "Please you have to activate your account via the email");
         }
 
     } else {

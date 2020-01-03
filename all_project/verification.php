@@ -25,22 +25,22 @@ if (isset($_GET['email']) && isset($_GET['hash']) && $_SERVER['REQUEST_METHOD'] 
 
     if ($results['hash'] == $hash && $results ['email'] == $email) {
         echo 'hash a email su v poriadku ';
-        //  change value na database active-account from 0 to 1 (active)
-        $numberOne = 1;
+        //  change value na database active-account from 1 to 2 (active)
+        $numberTwo = 2;  //  2 number means your account is active you can login
 
         $query = $conn->prepare('UPDATE users
 									     SET active_account=:active_account 
   								       WHERE email=:email
   							           /*AND hash = :hash 	 */     ');
 
-        $query->bindParam(':active_account', $numberOne);
+        $query->bindParam(':active_account', $numberTwo);
         $query->bindParam(':email', $email);
 
         if ($query->execute()) {
             ?>
             <script>
                 alert('Successfully Updated ...');
-                   window.location.href = 'index.php';
+                   window.location.href = 'login.php';
             </script>
             <?php
         } else {

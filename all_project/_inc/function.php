@@ -200,12 +200,9 @@ function getCountSearchBooks()
 
     if ($query->rowCount()) {
         $results = $query->fetchAll(PDO::FETCH_COLUMN);
-
-
     } else {
         $results = [];
     }
-
     return $results;
 
 }
@@ -319,6 +316,24 @@ order by  status'  );
 
 
     $records->execute();
+    $results = $records->fetchAll(PDO::FETCH_ASSOC);
+
+    return $results;
+}
+
+
+function getDataReservedBook($id)
+{
+    global $conn;
+
+    $records = $conn->prepare('SELECT users.email, books.book_autor,books.book_name, books.isbn FROM users 
+                                INNER JOIN  reserve ON users.id = reserve.user_id 
+                                INNER JOIN  books ON  reserve.book_id = books.book_id
+                               WHERE reserve.id = ? LIMIT 1'  );
+
+
+
+    $records->execute(array($id));
     $results = $records->fetchAll(PDO::FETCH_ASSOC);
 
     return $results;

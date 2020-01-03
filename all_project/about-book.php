@@ -194,14 +194,15 @@ echo '</pre>';
                         </form>
                         <br>
                         <!--Only the admin section -->
-                        <a href="<?php echo $site_url . '_admin/edit-item.php?edit_id=' . $value["book_id"] . '&place=1'; ?>"
+                        <?php if ($_SESSION['id'] == 1): ?>
+                    <a href="<?php echo $site_url . '_admin/edit-item.php?edit_id=' . $value["book_id"] . '&place=1'; ?>"
                            class="button btn btn-primary mx">Update</a>
 
                         <br>
                         <a href="<?php echo $site_url . '_admin/delete-item.php?delete_id=' . $value["book_id"]; ?>"
                            class="button btn btn-danger mx" onclick="return checkDelete()">Delete</a>
 
-                        <?php if ($_SESSION['id'] == 1): ?>
+
 
 
                         <?php endif; ?>

@@ -2,11 +2,11 @@
 session_start();
 require_once "_inc/config.php";
 require_once "_inc/function.php";
+require_once "email.php";
 include_once '_partials/header.php';
 
 
 $value = getBooks();
-
 
 
 if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
@@ -23,7 +23,6 @@ if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
 }
 
 
-
 if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
 
 
@@ -36,9 +35,44 @@ if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
 
     $update_post = $query->execute([
         'status' => 1,
-        'id'     => $_GET['reserve-ready']
+        'id' => $_GET['reserve-ready']
 
     ]);
+// I have to write query which take email via the id reservation
+// I nedd email who reservedd this book ,, message and send email
+
+    $book_data = getDataReservedBook($_GET['reserve-ready']);
+    //$email = $email[0]["email"];
+    echo '<pre>';
+    print_r($book_data);
+    echo '</pre>';
+
+    $email = $book_data[0]["email"];
+    $book_autor = $book_data[0]["book_autor"];
+    $book_name = $book_data[0]["book_name"];
+    $book_isbn = $book_data[0]["isbn"];
+
+
+    $subject = "Book reservation";
+    $messagebody = '<h3>Hello</h3>  ' . $email . '
+        ' .  '<br>' .  '                The following book is ready for taking.
+        ' .  '<br>' . '                     Book : ' . $book_name.'
+        ' .  '<br>' . '                     Autor :   ' . $book_autor.'
+        ' .  '<br>' . '                     Isbn :   ' . $book_isbn.'
+        ' .  '<br>' . ' 
+        ' .  '<br>' . ' You have received this email because you are registered at (add website)  ';
+
+
+    echo '<pre>';
+
+    print_r($email);
+    print_r($book_autor);
+    print_r($book_name);
+    print_r($book_isbn);
+    echo '</pre>';
+
+     sendEmail($email,$subject,$messagebody);
+
 
     if ($update_post) {
         echo '<div class="messageContainer">';
@@ -59,16 +93,17 @@ if (isset($_GET['reserve-reading']) && !empty($_GET['reserve-reading'])) {
 
     $query = $conn->prepare("
                 UPDATE reserve SET
-                    status        = :status
+                    status   = :status
                  WHERE  id = :id
             ");
 
 
     $update_post = $query->execute([
         'status' => 2,
-        'id'     => $_GET['reserve-reading']
+        'id' => $_GET['reserve-reading']
 
     ]);
+
 
     if ($update_post) {
         echo '<div class="messageContainer">';
@@ -313,7 +348,7 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
                             <br>
 
                             <label class="control-label">Book Img.</label>
-                            <input   class="input-group" type="file" name="user_image" accept="image/*"/>
+                            <input class="input-group" type="file" name="user_image" accept="image/*"/>
                             <br>
                             <label for="desription">Description</label>
                             <!--<input required type="text" name="desription" placeholder="">-->
@@ -340,20 +375,15 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
         <?php
 
 
-
-
-        if(isset($_GET["page"]) && !empty($_GET['page']))
-        {
+        if (isset($_GET["page"]) && !empty($_GET['page'])) {
             $page = $_GET["page"];
-        }
-        else
-        {
+        } else {
             $page = 1;
         }
         $record_per_page = 3; // number of record for page
-        $start_from = ($page-1)*$record_per_page;
+        $start_from = ($page - 1) * $record_per_page;
         echo '<pre>';
-        
+
 
         print_r($start_from);
         echo '<br>';
@@ -363,9 +393,6 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
 
 
         $value = getBookswithpagination($start_from, $record_per_page);
-
-
-
 
 
         ?>
@@ -438,18 +465,18 @@ onclick="return checkDelete()" > delete</a>';
 
                     <?php
                     $countBooks = getcountBooks();
-                    
+
                     echo '<pre>';
                     print_r($countBooks);
                     echo '</pre>';
-                    
+
                     $total_pages = ceil($countBooks[0] / $record_per_page);
                     echo '<br>';
-                    echo  "page " .$page;
+                    echo "page " . $page;
                     echo '<br>';
-                        echo '<br>';
-                    for ($i = 1 ; $i<= $total_pages; $i++) {
-                        echo '<a class="link edit-link" href=" ' . $site_url . 'admin-book.php?update-delete=1&page='. $i .'" class="edit-link "> '.$i.' </a>';
+                    echo '<br>';
+                    for ($i = 1; $i <= $total_pages; $i++) {
+                        echo '<a class="link edit-link" href=" ' . $site_url . 'admin-book.php?update-delete=1&page=' . $i . '" class="edit-link "> ' . $i . ' </a>';
                     }
                     ?>
                 </div>
@@ -476,8 +503,8 @@ onclick="return checkDelete()" > delete</a>';
 
 
         <?php if (empty($reserve)) {
-            echo '<h3>They are no reseravtions in this library</h3>'; }?>
-
+            echo '<h3>They are no reseravtions in this library</h3>';
+        } ?>
 
 
         <div class="container-table100">
