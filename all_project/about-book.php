@@ -6,11 +6,7 @@ include_once '_partials/header.php';
 
 
 $reserve = 3;
-/*
- * 1 vytiahnut data z databazi
- * 2. porovnat a spravit vysledok na zakalde dat
- *
-}*/
+
 
 if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
 
@@ -40,12 +36,9 @@ if (isset($_SESSION['errorMessagenumber']) && !empty($_SESSION['errorMessagenumb
 
 
 if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
-    /*echo '<pre>';
-    print_r($_GET['edit_id']);
-    echo '</pre>';*/
 
     $book = getOneData();
-    echo $book[0]['book_id'];
+//    echo $book[0]['book_id'];
 
 
     $status = getBookReservation();
@@ -57,12 +50,6 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     }
 
-
-    /*
- *
-    echo '<pre>';
-    print_r($book);
-    echo '</pre>';*/
 
 } elseif ($_POST) {
     if (isset($_POST['reserve'])) {
@@ -88,7 +75,7 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
         if ($insert) {
 
-            $message = "Reservation  was successful ";
+            $message = "Reservation  was successfuly ";
 
         }
 
@@ -102,22 +89,10 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
 
-        if (isset($_POST['delete']) && $_SESSION['id'] == 1 && $_POST['book_id']) {
-
-
-            /*poznamka potrebujem id uzivatela id knihy  a vytvorit query  tabulku a message success */
-
-            echo "mam delete";
-        }
-
     }
 
 } else die("404");
 
-
-echo '<pre>';
-print_r($book);
-echo '</pre>';
 
 ?>
 
@@ -132,9 +107,7 @@ echo '</pre>';
         <div class="col-md-6">
             <div class="rowe no-gutters  overflow-hidden flex-md-row mb-4  position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <!--<img class="img-book"
-                         src="https://mrtns.eu/tovar/_l/655/l655839.jpg?v=1574150481" alt="book">
--->
+
                     <img class="img-book"
                          src="<?php echo $site_url . 'user_images/' . $value["bookPic"] ?>" alt="book">
 
@@ -151,23 +124,16 @@ echo '</pre>';
                 <div class="col p-4 d-flex flex-column position-static left">
 
 
-
-
                     <h2><?php echo $value["book_name"] ?></h2>
-                    <p class="mb-auto"> <b>Autor :</b><?php echo $value["book_autor"] ?></p>
+                    <p class="mb-auto"><b>Autor :</b><?php echo $value["book_autor"] ?></p>
 
                     <p class="mb-auto"><b>Publisher:</b> <?php echo $value["publisher"] ?></p>
-                    <!--potrebne dokoncit-->
                     <p class="mb-auto"><b>ISBN:</b> <?php echo $value["isbn"] ?></p>
                     <p class="mb-auto"><b>Pages</b> <?php echo $value["pages"] ?></p>
                     <p class="mb-auto"><b>Year</b> <?php echo $value["made_year"] ?></p>
                     <p>
-                        <!--poznamka prva vec send instruction Laco , pato , jakub  and some example -->
-                        <!-- poznamka POtrebne vytvorit nove tabulky do databazi  Vydavatel POcet stran rok vydania -->
-                        <!--poznamka bude potrebne pridat new input do formularov, aj update formular  dopisat query  na pridanie do table -->
                     </p>
-                    <!--                    <button type="button" class="btn btn-success btn-sm btn-reserve">Borrow</button>
-                                       -->
+
                     <?php if (isset($_SESSION['id']) && !empty($_SESSION['id'])) : ?>
                         <?php if ($reserve == 1) : ?>
                             <p class="mb-auto">INFO : This book was already reserved</p>
@@ -188,21 +154,19 @@ echo '</pre>';
                                 <?php endif; ?>
 
                             <?php endif; ?>
-                            <input type="submit" class="btn-warning btn-sm btn-reserve button-books" name="favorite"
+<!--                            <input type="submit" class="btn-warning btn-sm btn-reserve button-books" name="favorite"
                                    value="Add Favorite">
-
+-->
                         </form>
                         <br>
                         <!--Only the admin section -->
                         <?php if ($_SESSION['id'] == 1): ?>
-                    <a href="<?php echo $site_url . '_admin/edit-item.php?edit_id=' . $value["book_id"] . '&place=1'; ?>"
-                           class="button btn btn-primary mx">Update</a>
+                            <a href="<?php echo $site_url . '_admin/edit-item.php?edit_id=' . $value["book_id"] . '&place=1'; ?>"
+                               class="button btn btn-primary mx">Update</a>
 
-                        <br>
-                        <a href="<?php echo $site_url . '_admin/delete-item.php?delete_id=' . $value["book_id"]; ?>"
-                           class="button btn btn-danger mx" onclick="return checkDelete()">Delete</a>
-
-
+                            <br>
+                            <a href="<?php echo $site_url . '_admin/delete-item.php?delete_id=' . $value["book_id"]; ?>"
+                               class="button btn btn-danger mx" onclick="return checkDelete()">Delete</a>
 
 
                         <?php endif; ?>

@@ -38,14 +38,9 @@ if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
         'id' => $_GET['reserve-ready']
 
     ]);
-// I have to write query which take email via the id reservation
-// I nedd email who reservedd this book ,, message and send email
 
     $book_data = getDataReservedBook($_GET['reserve-ready']);
-    //$email = $email[0]["email"];
-    echo '<pre>';
-    print_r($book_data);
-    echo '</pre>';
+
 
     $email = $book_data[0]["email"];
     $book_autor = $book_data[0]["book_autor"];
@@ -60,25 +55,18 @@ if (isset($_GET['reserve-ready']) && !empty($_GET['reserve-ready'])) {
         ' .  '<br>' . '                     Autor :   ' . $book_autor.'
         ' .  '<br>' . '                     Isbn :   ' . $book_isbn.'
         ' .  '<br>' . ' 
-        ' .  '<br>' . ' You have received this email because you are registered at (add website)  ';
+        ' .  '<br>' . ' You have received this email because you are registered at (www.sovy.unaux.com/)  ';
 
 
-    echo '<pre>';
-
-    print_r($email);
-    print_r($book_autor);
-    print_r($book_name);
-    print_r($book_isbn);
-    echo '</pre>';
-
-     sendEmail($email,$subject,$messagebody);
+   $email =   sendEmailBookIsReady($email,$subject,$messagebody);
 
 
-    if ($update_post) {
+    if ($update_post ) {
         echo '<div class="messageContainer">';
         echo '<div class="alert  alert-success " role="alert">';
         echo "Status was changed for";
-
+        echo '<br>';
+        echo $email;
         echo '<br>';
         echo '</div>';
         echo '</div>';
@@ -141,7 +129,7 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
                 <a class="nav-link btn-success but" href="<?php echo $site_url ?>admin-book.php?addbook=1">Add book</a>
             </li>
             <li class="padding">
-                <a class="nav-link btn-warning but" href="<?php echo $site_url ?>admin-book.php?update-delete=1">Update/Delete
+                <a class="nav-link btn-warning but" href="<?php echo $site_url ?>admin-book.php?update-delete=1">Edit/Delete
                     Book</a>
             </li>
             <li class="padding">
@@ -380,16 +368,8 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
         } else {
             $page = 1;
         }
-        $record_per_page = 3; // number of record for page
+        $record_per_page = 4; // number of record for page
         $start_from = ($page - 1) * $record_per_page;
-        echo '<pre>';
-
-
-        print_r($start_from);
-        echo '<br>';
-        print_r($record_per_page);
-
-        echo '</pre>';
 
 
         $value = getBookswithpagination($start_from, $record_per_page);
@@ -466,10 +446,6 @@ onclick="return checkDelete()" > delete</a>';
                     <?php
                     $countBooks = getcountBooks();
 
-                    echo '<pre>';
-                    print_r($countBooks);
-                    echo '</pre>';
-
                     $total_pages = ceil($countBooks[0] / $record_per_page);
                     echo '<br>';
                     echo "page " . $page;
@@ -494,9 +470,7 @@ onclick="return checkDelete()" > delete</a>';
     <?php if (isset($_GET['reserve'])) : ?>
 
     <?php $reserve = getAllReservation();
-    echo '<pre>';
-    print_r($reserve);
-    echo '</pre>'; ?>
+    ?>
 
     <h2>Reservation books</h2>
     <div class="limiter">
