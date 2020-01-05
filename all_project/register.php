@@ -2,7 +2,7 @@
 session_start();
 require_once '_inc/config.php';
 require_once '_inc/function.php';
-require_once 'email.php';
+
 
 
 /*if (isset($_SESSION['user_id'])) {
@@ -171,11 +171,11 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             /*$subject = 'Account Verification';
 
             $messagebody = ' Hello ' . $email . '
-            Thank you for signing up 
-            
+            Thank you for signing up
+
             Please click this link to activate your account
-            
-             
+
+
             http://localhost:80/library/verification.php?email=' . $email . '&hash=' . $hash;
 
             //http://localhost:82/library/verification.php?email=oriesok4@gmail.com&hash=069654d5ce089c13f642d19f09a3d1c0
@@ -187,9 +187,9 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
 */
 
-                        $subject = 'Account Verification';
+            $subject = 'Account Verification';
 
-                        $messagebody = ' Hello ' . $email . '
+            $messagebody = ' Hello ' . $email . '
                         Thank you for signing up 
                         
                         Please click this link to activate your account
@@ -197,15 +197,14 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                          
                         '. $site_url. 'verification.php?email=' . $email . '&hash=' . $hash;
 
-                        //mail($email, $subject, $messagebody);
+            //mail($email, $subject, $messagebody);
             //http://localhost:82/library/verification.php?email=oriesok4@gmail.com&hash=069654d5ce089c13f642d19f09a3d1c0
 
 
-            $message = 'Successfully created new user you have to active your account via the link in your email';
+            // $message = 'Successfully created new user you have to active your account via the link in your email';
+            require_once 'email.php';
 
-            echo '            http://localhost/library/verify.php?email= ' . $email . '&hash=' . $hash;
-
-            sendEmail($email,$subject, $messagebody );
+            sendEmail($email,$subject, $hash);
 
             $_SESSION['message'] = "Registration was successfully";
             header("Location: $site_url" . "login.php");

@@ -14,7 +14,7 @@ if (isset($_POST["send-email"]) && $_SERVER['REQUEST_METHOD']  === 'POST' ) {
     print_r($_POST);
     echo '</pre>';
 
-     sendContactEmail($_POST["email"],$_POST["name"],$_POST["message"]);
+    sendContactEmail($_POST["email"],$_POST["name"],$_POST["message"]);
 }
 
 

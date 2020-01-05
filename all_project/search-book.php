@@ -28,10 +28,7 @@ include_once '_partials/header.php';
 
     <?php if (isset($_GET["searchbook"]) && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
-        echo "I am here ";
-        echo '<pre>';
-        print_r($_GET["search"] );
-        echo '</pre>';
+
 
 
 
@@ -48,23 +45,11 @@ include_once '_partials/header.php';
 
 
 
-        echo '<pre>';
-        print_r($record_per_page);
-        echo '</pre>';
-
-
         /*$books = getSearchBookwithPagination($start_from, $record_per_page)*/;
         $books =getSearchBook($start_from, $record_per_page);
         $count = getCountSearchBooks();
         $count = $count[0];
 
-        echo '<pre>';
-        print_r($books);
-        echo '</pre>';
-        
-        echo '<pre>';
-        print_r($count);
-        echo '</pre>';
 
         if (empty($books)) {
             echo '<div class="alert  alert-danger " role="alert">';
