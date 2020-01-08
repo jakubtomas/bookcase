@@ -3,31 +3,9 @@ require_once '../_inc/config.php';
 require_once '../_inc/function.php';
 include_once '../_partials/header.php';
 
-/*poznamka overenie či  na danu stranku ma povelenie ist inak 401  ,, kontrolujes to cez $_SESSION['id']
-ako sa roby presmerovanie stranky  pozri video
-
- */
-
-
-/*poznamka change the background color from black to white like on the another page*/
-
-
-/*
- * 1 vytiahnem data pomocou $_GET['id']
- * co je extract
- * 2 . ukazat obrazok a input
- * 3. uz iba poslanie pomocou $_POST['']
- * 4. kontrola ako predtym pri posielani obrazka
- * */
 if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    echo '<pre>';
-    print_r($_GET['edit_id']);
-    echo '</pre>';
 
-    echo '<pre>';
-    print_r($_SESSION);
-    echo '</pre>';
 
     if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
 
@@ -57,11 +35,6 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
 
 
     $result = getOneData();
-
-    echo '<pre>';
-    print_r($result);
-    echo '</pre>';
-
 
     ?>
 
@@ -141,9 +114,6 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
 } elseif (isset($_GET['edit_id']) && isset($_GET['backid']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
-    echo '<pre>';
-    print_r($_SESSION);
-    echo '</pre>';
 
 
     if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
@@ -231,8 +201,7 @@ if (isset($_GET['edit_id']) && !isset($_GET['backid']) && $_SERVER['REQUEST_METH
             <p class="form-group">
                 <input name="book_id" type="hidden" value="<?php echo $_GET['edit_id'] ?>">
                 <a href="<?php echo $site_url ?>admin-book.php" class="back-link text-warning ">back</a>
-                <!--poznamka  potrebne vyriesit  ked sa sem dostaneš z sekcie about boook tak sa
-                tam aj vratis pri stlaceny na tlacidlo back a to plati aj na ten formular 2 krat -->
+
                 <input class="btn-sm btn-danger margin-bottom" type="submit" value="Update " name="update_book">
                 <!--test komentara-->
 

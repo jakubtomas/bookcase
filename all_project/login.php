@@ -29,9 +29,7 @@ if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $results = $records->fetch(PDO::FETCH_ASSOC);
 
     // password_verify($_POST['password'],$results["password"] );
-    echo '<pre>';
-    print_r($results["active_account"]);
-    echo '</pre>';
+
 
     if ($results) {
         // array_push($errorMessage, "Nasledujuci email  máme v databaze");

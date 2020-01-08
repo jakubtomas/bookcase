@@ -4,25 +4,23 @@ require_once '_inc/config.php';
 require_once '_inc/function.php';
 
 
-
 /*if (isset($_SESSION['user_id'])) {
     header("Location: /userautentification");
 }*/
 
-$errorEmail   = 0;
-$email        = "";
-$permission   = TRUE;
+$errorEmail = 0;
+$email = "";
+$permission = TRUE;
 $bad_password = FALSE;
 
 
 if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
-
     $desktopMessage = array();
 
-    $email            = plain(trim($_POST['email']));
-    $password         = plain(trim($_POST['password']));
+    $email = plain(trim($_POST['email']));
+    $password = plain(trim($_POST['password']));
     $confirm_password = plain(trim($_POST['confirm_password']));
 
     $_SESSION['email'] = plain(trim($_POST['email']));
@@ -94,7 +92,7 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             }*/
             /*2b*/
         } else {
-            array_push($desktopMessage, "Passwords dont match");;
+            array_push($desktopMessage, "Please make sure your passwords match");;
 
             $permission = FALSE;
         }
@@ -103,7 +101,6 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     if (!$errorEmail) {
 
         $records = $conn->prepare('SELECT (1) FROM users WHERE email= :email');
-
 
 
         $records->execute(array(':email' => $email));
@@ -123,14 +120,13 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     }
 
 
-
     if ($permission):
         echo 'insert';
 
-        $hash = md5(rand(0, 10000)); // potrebne ten hash vlozit do tabulky
+        $hash = md5(rand(0, 10000)); // neccessary add hash into databas
         echo ' second step is ';
         // enter the new user in the database
-        $sql  = "INSERT INTO users   (password, email,hash, active_account) VALUES  (:password, :email, :hash,:active_account)";
+        $sql = "INSERT INTO users   (password, email,hash, active_account) VALUES  (:password, :email, :hash,:active_account)";
         $stmt = $conn->prepare($sql);
 
 
@@ -147,66 +143,11 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         if ($results):
 
 
-            /* 1.  poznamka generovanie  hash md5 pre email
-             md5(rand(0,1000)) its okey
-
-            2. musim pridat do databazi stlpec active a predefinovana hodnota bude
-            nula akože nieje aktivovany a po kliknuti na aktivacčnyý link
-            sa acitve zmeni na jedna a presmeruje na stranku login okey
-
-            3. you have to create new stlpec in database for hash md5
-             generovany hash bude ukladat do databazi   potrebne dokoncit
-
-            4. you have to create  verify.php where you check hash and if hash is
-            correct after this  change active user from 0 to 1
-            */
-
-
-            /*
-
-                        */
-
-            /* SEND EMAIL  CONTROL */
-
-            /*$subject = 'Account Verification';
-
-            $messagebody = ' Hello ' . $email . '
-            Thank you for signing up
-
-            Please click this link to activate your account
-
-
-            http://localhost:80/library/verification.php?email=' . $email . '&hash=' . $hash;
-
-            //http://localhost:82/library/verification.php?email=oriesok4@gmail.com&hash=069654d5ce089c13f642d19f09a3d1c0
-
-            mail($email, $subject, $messagebody);
-
-
-
-
-*/
-
-            $subject = 'Account Verification';
-
-            $messagebody = ' Hello ' . $email . '
-                        Thank you for signing up 
-                        
-                        Please click this link to activate your account
-                        
-                         
-                        '. $site_url. 'verification.php?email=' . $email . '&hash=' . $hash;
-
-            //mail($email, $subject, $messagebody);
-            //http://localhost:82/library/verification.php?email=oriesok4@gmail.com&hash=069654d5ce089c13f642d19f09a3d1c0
-
-
-            // $message = 'Successfully created new user you have to active your account via the link in your email';
             require_once 'email.php';
 
-            sendEmail($email,$subject, $hash);
+            sendEmail($email, $hash);
 
-            $_SESSION['message'] = "Registration was successfully";
+            $_SESSION['message'] = "Registration was successfully. Please check your email";
             header("Location: $site_url" . "login.php");
         else:
             $message = 'Sorry registration failed  ,Try again';
@@ -217,7 +158,6 @@ if (isset($_POST['add-registration']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 }
 
 
-// poznamka kontrolny vypis
 $records = $conn->prepare('SELECT * FROM users');
 //$records->bindParam(':email', $_POST['email']);
 $records->execute();
@@ -229,11 +169,8 @@ include_once '_partials/header.php';
 ?>
 
 
-
-
-
 <h1 class="loginwords">Sign up</h1>
-<span class="loginwords">or <a  class="loginwords" href="login.php">login here</a></span>
+<span class="loginwords">or <a class="loginwords" href="login.php">login here</a></span>
 
 
 <div class="messageContainer">
@@ -271,7 +208,7 @@ include_once '_partials/header.php';
         ?>
 
 
-        <input type="password" placeholder="and password" name="password"  required>
+        <input type="password" placeholder="and password" name="password" required>
 
 
         <input type="password" placeholder="confirm password" name="confirm_password" required>
@@ -285,9 +222,5 @@ include_once '_partials/header.php';
 <?php
 
 
-// poznamka nefunguje vypisvanie  priradenie do hodnot erromessage ,, riesenie je vytvorenie pola
-// do ktoreho budeme pridavat error message a potom to vypisem  ries  to cez pole video youtube codesource
-
-// nekuzaju vypis  ked zadam  male heslo do 6 znakov
 unset($_SESSION['email']);
 include_once '_partials/footer.php' ?>

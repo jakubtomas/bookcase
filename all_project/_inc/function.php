@@ -258,9 +258,7 @@ function getRecordReserve($book_id)
 
     $query = $conn->prepare("SELECT * FROM reserve WHERE book_id = ? AND user_id = ?  ");
 
-    $query->execute(array($book_id,
-                          $_SESSION['id']
-    ));
+    $query->execute(array($book_id, $_SESSION['id']));
 
     if ($query->rowCount()) {
         /*$results = $query->fetchAll(PDO::FETCH_ASSOC)*/;
@@ -268,7 +266,7 @@ function getRecordReserve($book_id)
         $results =1;
 
     } else {
-        echo 'nic nieje ';
+       // echo 'Nothing reservation ';
         $results = 0;
     }
     return $results;

@@ -21,9 +21,7 @@ if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
 
 /// FORMULAR
 $value =getReservation();
-echo '<pre>';
-print_r($value);
-echo '</pre>';
+
 
 
 ?>

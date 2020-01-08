@@ -7,9 +7,7 @@ require_once '../_inc/function.php';
 $permission = 1;
 
 if (isset($_POST['add-book']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+
 
 
 
@@ -126,7 +124,7 @@ if (isset($_POST['add-book']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             // poznamka vytvorit message ked spravne  ulozis data do databazi
             // poznamka vytvorit message aj pri update data
 
-            $_SESSION['errorMessage'] = " data was success insert";
+            $_SESSION['errorMessage'] = "Data has been saved successfully";
             unset($_SESSION['isbn'], $_SESSION['book_autor'], $_SESSION['book_name'],
                 $_SESSION['genre'], $_SESSION['desription'], $_SESSION['errorMessagenumber']);
 

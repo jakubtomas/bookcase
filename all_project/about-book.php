@@ -46,7 +46,7 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         $reserve = getRecordReserve($book[0]['book_id']);
-        echo $reserve;
+     //   echo $reserve;
 
     }
 
@@ -99,9 +99,7 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 
-<?php foreach ($book
-
-               as $value) : ?>
+<?php foreach ($book as $value) : ?>
 <div class="container bg-white border rounded shadow p-3 mb-5 ">
     <div class="rowe mb-2 ">
         <div class="col-md-6">
@@ -176,12 +174,11 @@ if (isset($_GET['edit_id']) && $_SERVER['REQUEST_METHOD'] == 'GET') {
                     <p></p>
                     <p><b> Description:</b></p>
                     <p>
-                    <p class="text-justify"> <?php echo substr($value["desription"], 0, 140); ?>
+                    <p class="text-justify"> <?php echo $value["desription"]; ?>
                         <!--<span class="collapse " id="viewdetails3"><?php /*echo $value["desription"] */ ?></span>-->
-                        <span class="collapse "
-                              id="viewdetails3"><?php echo plain($value["desription"], 140, 6000) ?></span>
-                        <a class="btn text-primary" data-toggle="collapse" data-target="#viewdetails3">Read more</a>
-                    </p>
+                      <!--  <span class="collapse "
+                              id="viewdetails3"><?php /*echo plain($value["desription"], 140, 6000) */?></span>
+                        <a class="btn text-primary" data-toggle="collapse" data-target="#viewdetails3">Read more</a>-->
                     </p>
                 </div>
             </div>

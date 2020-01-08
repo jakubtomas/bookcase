@@ -1040,3 +1040,7 @@ li a:hover {
     }
 }
 
+.stred {
+display: inline-block;
+}
+

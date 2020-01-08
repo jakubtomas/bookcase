@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-function sendEmail($email,$subject, $hash)
+function sendEmail($email, $hash)
 {
 
 // potrebne zmenit email adresu , subject , message body a vyskusat ,, pozor na pridavanie premennych do uvodzoviek
@@ -25,15 +25,15 @@ function sendEmail($email,$subject, $hash)
         $mail->Host       = 'smtp.azet.sk';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
-        $mail->Username   = 'zajao@azet.sk';                     // SMTP username
-        $mail->Password   = 'creative159753';                               // SMTP password
+        $mail->Username   = 'bookcase@azet.sk';                     // SMTP username
+        $mail->Password   = 'Kosice2019';                               // SMTP password
         // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 465;                                    // TCP port to connect to
         // TCP port to connect to
         // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('zajao@azet.sk');
+        $mail->setFrom('bookcase@azet.sk');
 
         $mail->addAddress($email);     // Add a recipient
 
@@ -76,15 +76,15 @@ function sendEmailBookIsReady($email,$subject, $messagebody)
         $mail->Host       = 'smtp.azet.sk';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
-        $mail->Username   = 'zajao@azet.sk';                     // SMTP username
-        $mail->Password   = 'creative159753';                               // SMTP password
+        $mail->Username   = 'bookcase@azet.sk';                     // SMTP username
+        $mail->Password   = 'Kosice2019';                               // SMTP password
         // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 465;                                    // TCP port to connect to
         // TCP port to connect to
         // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('zajao@azet.sk');
+        $mail->setFrom('bookcase@azet.sk');
 
         $mail->addAddress($email);     // Add a recipient
 
@@ -93,9 +93,9 @@ function sendEmailBookIsReady($email,$subject, $messagebody)
         $mail->Subject =$subject;
         $mail->Body    = $messagebody;
         $mail->send();
-        echo 'Message has been sent';
+        return 'Message has been sent';
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 
 }
@@ -119,15 +119,15 @@ function sendContactEmail($email,$name,$message)
         $mail->Host       = 'smtp.azet.sk';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
-        $mail->Username   = 'zajao@azet.sk';                     // SMTP username
-        $mail->Password   = 'creative159753';                               // SMTP password
+        $mail->Username   = 'bookcase@azet.sk';                     // SMTP username
+        $mail->Password   = 'Kosice2019';                               // SMTP password
         //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 465;                                     // TCP port to connect to
 
         //Recipients
-        $mail->setFrom("zajao@azet.sk");
+        $mail->setFrom("bookcase@azet.sk");
 
-        $mail->addAddress("zajao@azet.sk");     // Add a recipient
+        $mail->addAddress("bookcase@azet.sk");     // Add a recipient
         //$mail->addReplyTo($email,$name);
 
 
@@ -148,9 +148,9 @@ function sendContactEmail($email,$name,$message)
         $mail->AltBody = "This is message ";
 
         $mail->send();
-        echo 'Message has been sent';
+        return 'Message has been sent';
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 
 }

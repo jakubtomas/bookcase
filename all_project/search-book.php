@@ -104,17 +104,8 @@ include_once '_partials/header.php';
         <?php
         $countBooks = getCountSearchBooks();
 
-        echo '<pre>';
-        print_r($countBooks[0]);
-        echo '</pre>';
-
         $total_pages = ceil($countBooks[0] / $record_per_page);
-        
-        
-        echo '<pre>';
-        print_r($total_pages);
-        echo '</pre>';
-        
+
         echo  "page " .$page;
         echo '<br>';
         echo '<br>';
