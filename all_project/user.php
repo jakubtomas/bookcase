@@ -5,6 +5,8 @@ require_once "_inc/function.php";
 include_once '_partials/header.php';
 
 
+
+
 if (isset($_SESSION['errorMessage']) && !empty($_SESSION['errorMessage'])) {
 
     echo '<div class="messageContainer">';

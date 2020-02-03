@@ -118,7 +118,7 @@ if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
 <div class="skuska">
 
 
-    <form action="login.php" method="POST">
+    <form class="animated" action="login.php" method="POST">
 
         <div class="imgcontainer">
             <img src="img_avatar2.png" alt="Avatar" class="avatar">

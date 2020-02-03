@@ -13,8 +13,6 @@
     }
 }
 
-
-
 .bg {
 
     background-image: url("https://wallpaperaccess.com/full/253371.jpg");
@@ -166,6 +164,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="dat
 
 .margin-bottom {
     margin-bottom: 15px;
+}
+
+.mb600 {
+    margin-bottom: 600px;
+
 }
 
 .button-books {
@@ -1042,5 +1045,20 @@ li a:hover {
 
 .stred {
 display: inline-block;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
 }
 

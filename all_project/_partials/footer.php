@@ -9,7 +9,7 @@
 </script>
 
 
-<footer class="page-footer font-small bg-white">
+<footer class="page-footer font-small bg-white " >
 
     <div class="col-10 col-md">
 

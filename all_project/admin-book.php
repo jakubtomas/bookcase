@@ -362,7 +362,6 @@ if (empty($_SESSION['id']) || ($_SESSION['id']) != 1) {
 
         <?php
 
-
         if (isset($_GET["page"]) && !empty($_GET['page'])) {
             $page = $_GET["page"];
         } else {

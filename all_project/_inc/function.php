@@ -22,6 +22,27 @@ function getBooks()
 }
 
 
+function  getNumberPicture($userpic)
+{
+    global $conn;
+    $query = $conn->prepare("SELECT * FROM books WHERE   bookPic = ? LIMIT 1");
+
+    $query->execute(array($userpic));
+
+
+    if ($query->rowCount()) {
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    } else {
+        $results = [];
+    }
+
+
+
+        return $results;
+}
+
+
 function getBookswithpagination($start_from, $record_per_page)
 {
     global $conn;
