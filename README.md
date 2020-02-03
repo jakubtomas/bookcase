@@ -1,2 +1,2 @@
 # bookcase
-This is our project 
+You know that feeling when you go to the library and they don´t have the book you are looking for. Yes, we know that feeling too and that is the main reason why we decided to create this website called The Library. Our website provides information about books and reservations in our library. It is meant to simplify the process of borrowing books to people and also to make the work in libraries easier.				
